@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .form-section {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .preview-section {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .profile-picture {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .profile-picture img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+        text-underline-position: auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .section {
+        margin-bottom: 20px;
+      }
+
+      .experience-item,
+      .education-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+      }
+
+      .preview-section {
+        font-size: 14px;
+      }
+
+      .preview-section h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .preview-section h3 {
+        color: black;
+        margin-bottom: 5px;
+        background-color: rgb(222, 226, 230);
+      }
+
+      .contact-info {
+        margin-bottom: 20px;
+      }
+
+      @media print {
+        .form-section {
+          display: none;
+        }
+        .preview-section {
+          grid-column: 1 / -1;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-section">
+        <h2>Resume Builder</h2>
+
+        <form id="resumeForm">
+          <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <input
+              type="text"
+              id="profilePicture"
+              placeholder="enter your URL"
+            />
+          </div>
+          <div class="form-group">
+            <h3>Personal Information</h3>
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required />
+
+            <label for="location">Location</label>
+            <input type="text" id="location" required />
+          </div>
+
+          <div class="form-group">
+            <h3>Professional Summary</h3>
+            <textarea id="summary" rows="4" required></textarea>
+          </div>
+
+          <div class="form-group" id="experienceSection">
+            <h3>Work Experience</h3>
+            <div id="experienceList"></div>
+            <button type="button" id="addExperience">Add Experience</button>
+          </div>
+
+          <div class="form-group" id="educationSection">
+            <h3>Education</h3>
+            <div id="educationList"></div>
+            <button type="button" id="addEducation">Add Education</button>
+          </div>
+
+          <div class="form-group" id="skillsSection">
+            <h3>Skills</h3>
+            <textarea
+            id="skills"
+            rows="3"
+            required placeholder="Enter skills separated by commas">
+           </textarea>
+           </div> 
+
+           <div class="form-group" id="languageSection">
+            <h3>Languages</h3>
+            <textarea
+            id="languages"
+            row="3"
+            required placeholder="Enter languages Experties">
+          </textarea>
+           </div>
+
+          <button type="submit">Generate Resume</button>
+          <button type="button" id="printResume">Print Resume</button>
+        </form>
+      </div>
+
+      <div class="preview-section" id="resumePreview">
+        <!-- Preview will be populated by JavaScript -->
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
