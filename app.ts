@@ -170,65 +170,66 @@ class ResumeBuilder {
 
   private generatePreview(): void {
     this.previewSection.innerHTML = `
-        <div class="profile-picture">
-            <img src="${
-              this.resume.profilePicture || "/api/placeholder/200/200"
-            }" alt="Profile Picture">
-        </div>
-            <h1>${this.resume.personalInfo.fullName}</h1>
-            <div class="contact-info">
-                <p>${this.resume.personalInfo.email} | ${
+      <div class="profile-picture">
+          <img src="${
+            this.resume.profilePicture || "/api/placeholder/200/200"
+          }">
+      </div>
+          <h1>${this.resume.personalInfo.fullName}</h1>
+          <div class="contact-info">
+              <p>${this.resume.personalInfo.email} | ${
       this.resume.personalInfo.phone
     }</p>
-                <p>${this.resume.personalInfo.location}</p>
-            </div>
+              <p>${this.resume.personalInfo.location}</p>
+          </div>
 
-            <div class="section">
-                <h3>Professional Summary</h3>
-                <p>${this.resume.summary}</p>
-            </div>
+          <div class="section">
+              <h3>Professional Summary</h3>
+              <p>${this.resume.summary}</p>
+          </div>
 
-            <div class="section">
-                <h3>Experience</h3>
-                ${this.resume.experience
-                  .map(
-                    (exp) => `
-                    <div class="experience-item">
-                        <h4>${exp.title} at ${exp.company}</h4>
-                        <p>${exp.startDate} - ${exp.endDate}</p>
-                        <p>${exp.description}</p>
-                    </div>
-                `
-                  )
-                  .join("")}
-            </div>
+          <div class="section">
+              <h3>Experience</h3>
+              ${this.resume.experience
+                .map(
+                  (exp) => `
+                  <div class="experience-item">
+                      <h4>${exp.title} at ${exp.company}</h4>
+                      <p>${exp.startDate} - ${exp.endDate}</p>
+                      <p>${exp.description}</p>
+                  </div>
+              `
+                )
+                .join("")}
+          </div>
 
-            <div class="section">
-                <h3>Education</h3>
-                ${this.resume.education
-                  .map(
-                    (edu) => `
-                    <div class="education-item">
-                        <h4>${edu.degree}</h4>
-                        <p>${edu.school} - ${edu.graduationDate}</p>
-                    </div>
-                `
-                  )
-                  .join("")}
-            </div>
+          <div class="section">
+              <h3>Education</h3>
+              ${this.resume.education
+                .map(
+                  (edu) => `
+                  <div class="education-item">
+                      <h4>${edu.degree}</h4>
+                      <p>${edu.school} - ${edu.graduationDate}</p>
+                  </div>
+              `
+                )
+                .join("")}
+          </div>
 
-            <div class="section">
-                <h3>Skills</h3>
-              ${this.resume.skills.map((skill) => `<p>${skill}</p>`).join("")}
-            </div>
+          <div class="section">
+              <h3>Skills</h3>
+            ${this.resume.skills.map((skill) => `<p>${skill}</p>`).join("")}
+          </div>
 
-            <div class="section">
-                 <h3>Languages</h3>
-              ${this.resume.languages.map((languages) => `<p>${languages}</p>`).join("")}
-            </di
-            `;
+          <div class="section">
+               <h3>Languages</h3>
+            ${this.resume.languages
+              .map((languages) => `<p>${languages}</p>`)
+              .join("")}
+          </di
+          `;
   }
-
   private handleSubmit(e: Event): void {
     e.preventDefault();
     this.collectFormData();
