@@ -81,61 +81,39 @@ var ResumeBuilder = /** @class */ (function () {
     };
     ResumeBuilder.prototype.collectFormData = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var profilePic, photoFile, photoBase64;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.resume.personalInfo = {
-                            fullName: document.getElementById("fullName").value,
-                            email: document.getElementById("email").value,
-                            phone: document.getElementById("phone").value,
-                            location: document.getElementById("location").value,
-                        };
-                        this.resume.summary = document.getElementById("summary").value;
-                        this.resume.experience = Array.from(this.experienceList.getElementsByClassName("experience-item")).map(function (item) { return ({
-                            title: item.querySelector('input[placeholder="Job Title"]').value,
-                            company: item.querySelector('input[placeholder="Company"]').value,
-                            startDate: item.querySelector('input[placeholder="Start Date"]').value,
-                            endDate: item.querySelector('input[placeholder="End Date"]').value,
-                            description: item.querySelector("textarea")
-                                .value,
-                        }); });
-                        this.resume.education = Array.from(this.educationList.getElementsByClassName("education-item")).map(function (item) { return ({
-                            degree: item.querySelector('input[placeholder="Degree"]').value,
-                            school: item.querySelector('input[placeholder="School"]').value,
-                            graduationDate: item.querySelector('input[placeholder="Graduation Date"]').value,
-                        }); });
-                        this.resume.skills = document.getElementById("skills").value
-                            .split(",")
-                            .map(function (skill) { return skill.trim(); });
-                        this.resume.languages = document.getElementById("languages").value
-                            .split(",")
-                            .map(function (languages) { return languages.trim(); });
-                        profilePic = document.getElementById("profilePicture");
-                        photoFile = profilePic.files ? profilePic.files[0] : null;
-                        photoBase64 = '';
-                        if (!photoFile) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.fileToBase64(photoFile)];
-                    case 1:
-                        photoBase64 = _a.sent();
-                        localStorage.setItem("profilePic", photoBase64);
-                        profilePic.src = photoBase64;
-                        _a.label = 2;
-                    case 2: return [2 /*return*/];
-                }
+                this.resume.personalInfo = {
+                    fullName: document.getElementById("fullName").value,
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("phone").value,
+                    location: document.getElementById("location").value,
+                };
+                this.resume.summary = document.getElementById("summary").value;
+                this.resume.experience = Array.from(this.experienceList.getElementsByClassName("experience-item")).map(function (item) { return ({
+                    title: item.querySelector('input[placeholder="Job Title"]').value,
+                    company: item.querySelector('input[placeholder="Company"]').value,
+                    startDate: item.querySelector('input[placeholder="Start Date"]').value,
+                    endDate: item.querySelector('input[placeholder="End Date"]').value,
+                    description: item.querySelector("textarea")
+                        .value,
+                }); });
+                this.resume.education = Array.from(this.educationList.getElementsByClassName("education-item")).map(function (item) { return ({
+                    degree: item.querySelector('input[placeholder="Degree"]').value,
+                    school: item.querySelector('input[placeholder="School"]').value,
+                    graduationDate: item.querySelector('input[placeholder="Graduation Date"]').value,
+                }); });
+                this.resume.skills = document.getElementById("skills").value
+                    .split(",")
+                    .map(function (skill) { return skill.trim(); });
+                this.resume.languages = document.getElementById("languages").value
+                    .split(",")
+                    .map(function (languages) { return languages.trim(); });
+                return [2 /*return*/];
             });
         });
     };
-    ResumeBuilder.prototype.fileToBase64 = function (file) {
-        return new Promise(function (resolve, reject) {
-            var reader = new FileReader();
-            reader.onloadend = function () { return resolve(reader.result); };
-            reader.onerror = reject;
-            reader.readAsDataURL(file);
-        });
-    };
     ResumeBuilder.prototype.generatePreview = function () {
-        this.previewSection.innerHTML = "\n    \n       \n          <h1>".concat(this.resume.personalInfo.fullName, "</h1>\n          <div class=\"contact-info\">\n              <p>").concat(this.resume.personalInfo.email, " | ").concat(this.resume.personalInfo.phone, "</p>\n              <p>").concat(this.resume.personalInfo.location, "</p>\n          </div>\n\n          <div class=\"section\">\n              <h3>Professional Summary</h3>\n              <p>").concat(this.resume.summary, "</p>\n          </div>\n\n          <div class=\"section\">\n              <h3>Experience</h3>\n              ").concat(this.resume.experience
+        this.previewSection.innerHTML = "\n          <h1>".concat(this.resume.personalInfo.fullName, "</h1>\n          <div class=\"contact-info\">\n              <p>").concat(this.resume.personalInfo.email, " | ").concat(this.resume.personalInfo.phone, "</p>\n              <p>").concat(this.resume.personalInfo.location, "</p>\n          </div>\n\n          <div class=\"section\">\n              <h3>Professional Summary</h3>\n              <p>").concat(this.resume.summary, "</p>\n          </div>\n\n          <div class=\"section\">\n              <h3>Experience</h3>\n              ").concat(this.resume.experience
             .map(function (exp) { return "\n                  <div class=\"experience-item\">\n                      <h4>".concat(exp.title, " at ").concat(exp.company, "</h4>\n                      <p>").concat(exp.startDate, " - ").concat(exp.endDate, "</p>\n                      <p>").concat(exp.description, "</p>\n                  </div>\n              "); })
             .join(""), "\n          </div>\n\n          <div class=\"section\">\n              <h3>Education</h3>\n              ").concat(this.resume.education
             .map(function (edu) { return "\n                  <div class=\"education-item\">\n                      <h4>".concat(edu.degree, "</h4>\n                      <p>").concat(edu.school, " - ").concat(edu.graduationDate, "</p>\n                  </div>\n              "); })

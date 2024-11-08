@@ -163,28 +163,6 @@ class ResumeBuilder {
     ).value
       .split(",")
       .map((languages) => languages.trim());
-  
-  const profilePic = document.getElementById("profilePicture") as HTMLInputElement;
-
-    const photoFile = profilePic.files? profilePic.files[0]:null;
-    let photoBase64 = '';
-
-    if(photoFile){
-      photoBase64 = await this.fileToBase64(photoFile);
-
-      localStorage.setItem("profilePic",photoBase64)
-      profilePic.src = photoBase64;
-    }
-    }
-  private fileToBase64(file:File): Promise<string>{
-    return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend=()=>resolve(
-            reader.result as string
-     ) 
-    reader.onerror = reject;
-    reader.readAsDataURL(file)
-    })
   }
 
   private generatePreview(): void {
