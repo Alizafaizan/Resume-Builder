@@ -103,16 +103,13 @@ class ResumeBuilder {
     this.educationList.appendChild(educationItem);
   }
 
-  private collectFormData(): void {
+  private async collectFormData(): Promise<void> {
     this.resume.personalInfo = {
       fullName: (document.getElementById("fullName") as HTMLInputElement).value,
       email: (document.getElementById("email") as HTMLInputElement).value,
       phone: (document.getElementById("phone") as HTMLInputElement).value,
       location: (document.getElementById("location") as HTMLInputElement).value,
     };
-    this.resume.profilePicture = (
-      document.getElementById("profilePicture") as HTMLInputElement
-    ).value;
 
     this.resume.summary = (
       document.getElementById("summary") as HTMLTextAreaElement
@@ -166,15 +163,32 @@ class ResumeBuilder {
     ).value
       .split(",")
       .map((languages) => languages.trim());
+  
+  const profilePic = document.getElementById("profilePicture") as HTMLInputElement;
+
+    const photoFile = profilePic.files? profilePic.files[0]:null;
+    let photoBase64 = '';
+
+    if(photoFile){
+      photoBase64 = await this.fileToBase64(photoFile);
+
+      localStorage.setItem("profilePic",photoBase64)
+      profilePic.src = photoBase64;
+    }
+    }
+  private fileToBase64(file:File): Promise<string>{
+    return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend=()=>resolve(
+            reader.result as string
+     ) 
+    reader.onerror = reject;
+    reader.readAsDataURL(file)
+    })
   }
 
   private generatePreview(): void {
     this.previewSection.innerHTML = `
-      <div class="profile-picture">
-          <img src="${
-            this.resume.profilePicture || "/api/placeholder/200/200"
-          }">
-      </div>
           <h1>${this.resume.personalInfo.fullName}</h1>
           <div class="contact-info">
               <p>${this.resume.personalInfo.email} | ${

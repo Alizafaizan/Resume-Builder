@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resume Builder</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-      }
-
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: Arial, sans-serif;
+            }
+      /* /* Ba */
       body {
         background-color: #f5f5f5;
         padding: 20px;
@@ -124,6 +124,7 @@
         margin-bottom: 20px;
       }
 
+      /* Responsive Styles */
       @media print {
         .form-section {
           display:none;
@@ -138,6 +139,7 @@
           box-shadow: none;
         }
       }
+            
     </style>
   </head>
   <body>
@@ -150,7 +152,7 @@
             <label for="profilePicture">Profile Picture</label>
             <input
               type="file"
-              id="profilePicture"
+              id="profilePic"
               placeholder="choose your photo"
             />
           </div>
@@ -212,10 +214,9 @@
           <button type="button" id="printResume">Print Resume</button>
         </form>
       </div>
-
-      <div class="preview-section" id="resumePreview">
-        <!-- Preview will be populated by JavaScript -->
-      </div>
+    </div>
+    <div class="preview-section" id="resumePreview">
+      <!-- Preview will be populated by JavaScript -->
     </div>
     <script src="app.js"></script>
   </body>
